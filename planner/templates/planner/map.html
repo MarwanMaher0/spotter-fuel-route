@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fuel plan: {{ trip.start.query }} → {{ trip.finish.query }}</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    html, body { margin: 0; height: 100%; font: 14px/1.4 system-ui, sans-serif; }
+    #map { position: absolute; inset: 0; }
+    .panel { position: absolute; top: 12px; right: 12px; z-index: 1000; max-width: 340px;
+             max-height: calc(100% - 48px); overflow: auto; background: #fff; padding: 12px 14px;
+             border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,.25); }
+    .panel h1 { font-size: 15px; margin: 0 0 6px; }
+    .total { font-size: 22px; font-weight: 700; margin: 6px 0; }
+    .muted { color: #666; font-size: 12px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 8px; font-size: 12px; }
+    td, th { padding: 3px 4px; border-top: 1px solid #eee; text-align: left; vertical-align: top; }
+    td.num, th.num { text-align: right; white-space: nowrap; }
+  </style>
+</head>
+<body>
+<div id="map"></div>
+<div class="panel">
+  <h1>{{ trip.start.query }} → {{ trip.finish.query }}</h1>
+  <div class="muted">{{ trip.route.distance_miles }} mi · {{ trip.route.duration_hours }} h driving</div>
+  <div class="total">${{ trip.summary.total_fuel_cost_usd }}</div>
+  <div class="muted">
+    {{ trip.summary.gallons_purchased }} gal bought at {{ trip.summary.number_of_stops }} stop(s),
+    starting with {{ trip.summary.start_fuel_gallons }} gal ·
+    {{ trip.summary.assumptions.mpg }} mpg, {{ trip.summary.assumptions.max_range_miles }} mi range
+  </div>
+  <table>
+    <tr><th>#</th><th>Station</th><th class="num">Mile</th><th class="num">$/gal</th><th class="num">Gal</th><th class="num">Cost</th></tr>
+    {% for stop in trip.fuel_stops %}
+    <tr>
+      <td>{{ stop.stop }}</td>
+      <td>{{ stop.name }}<br><span class="muted">{{ stop.address }}, {{ stop.city }}, {{ stop.state }}</span></td>
+      <td class="num">{{ stop.mile }}</td>
+      <td class="num">{{ stop.price_per_gallon }}</td>
+      <td class="num">{{ stop.gallons }}</td>
+      <td class="num">${{ stop.cost_usd }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="6">No fuel needed: the starting tank covers the trip.</td></tr>
+    {% endfor %}
+  </table>
+  <div class="muted" style="margin-top:6px">
+    External API calls for this request: {{ trip.meta.external_api_calls }}
+    {% if trip.meta.route_from_cache %}(route served from cache){% endif %}
+  </div>
+</div>
+{{ trip|json_script:"trip-data" }}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const trip = JSON.parse(document.getElementById("trip-data").textContent);
+  const map = L.map("map");
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 18,
+    attribution: "&copy; OpenStreetMap contributors",
+  }).addTo(map);
+
+  const line = L.geoJSON(trip.route.geometry, { style: { color: "#2563eb", weight: 5, opacity: 0.8 } }).addTo(map);
+  map.fitBounds(line.getBounds(), { paddingTopLeft: [30, 30], paddingBottomRight: [380, 30] });
+
+  const pin = (lat, lon, color, label) =>
+    L.circleMarker([lat, lon], { radius: 9, color: "#fff", weight: 2, fillColor: color, fillOpacity: 1 })
+      .bindTooltip(label).addTo(map);
+  pin(trip.start.lat, trip.start.lon, "#16a34a", "Start: " + trip.start.resolved_as);
+  pin(trip.finish.lat, trip.finish.lon, "#dc2626", "Finish: " + trip.finish.resolved_as);
+
+  for (const stop of trip.fuel_stops) {
+    L.marker([stop.lat, stop.lon])
+      .bindPopup(
+        `<b>Stop ${stop.stop}: ${stop.name}</b><br>${stop.address}, ${stop.city}, ${stop.state}` +
+        `<br>Mile ${stop.mile} · $${stop.price_per_gallon}/gal` +
+        `<br>Buy ${stop.gallons} gal = <b>$${stop.cost_usd}</b>`
+      )
+      .bindTooltip(`${stop.stop}`, { permanent: true, direction: "top", offset: [-15, -10] })
+      .addTo(map);
+  }
+</script>
+</body>
+</html>
