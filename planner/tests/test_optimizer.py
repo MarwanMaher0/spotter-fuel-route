@@ -121,13 +121,18 @@ class StopCostTests(SimpleTestCase):
 
     def test_matches_exhaustive_search_over_stop_sets(self):
         rng = random.Random(5)
-        for _ in range(40):
-            route = rng.randint(200, 380)
-            cands = stations(*[(rng.randint(0, route), round(rng.uniform(2.5, 4.5), 2)) for _ in range(rng.randint(3, 8))])
+        checked = 0
+        while checked < 40:
+            route = round(rng.uniform(200, 380), 3)
+            cands = stations(*[(round(rng.uniform(0, route), 3), round(rng.uniform(2.5, 4.5), 3))
+                               for _ in range(rng.randint(3, 8))])
+            if _near_range_limit(cands, route, max_range=100, start_fuel=60):
+                continue  # the DP is deliberately conservative within 0.2 mi of the range
             try:
                 plan = plan_fuel_stops(cands, route, max_range=100, mpg=10, start_fuel=60, stop_cost=4)
             except NoFeasiblePlan:
                 continue
+            checked += 1
             best = float("inf")
             for size in range(len(cands) + 1):
                 for subset in itertools.combinations(cands, size):
@@ -137,3 +142,32 @@ class StopCostTests(SimpleTestCase):
                         continue
                     best = min(best, sub.total_cost + 4 * len(sub.purchases))
             self.assertAlmostEqual(plan.total_cost + 4 * len(plan.purchases), best, places=6)
+
+    def test_dp_choice_is_always_feasible_on_half_mile_grid(self):
+        # Real routes put stations on a 0.5-mile grid. Rounding those to whole
+        # miles once let the DP accept a 500.5-mile stretch; the margins must
+        # make every accepted choice pass the exact check.
+        from planner.services.optimizer import _check_reachable, _choose_stops
+
+        rng = random.Random(3)
+        accepted = 0
+        for _ in range(300):
+            route = rng.randint(1200, 3000) + 0.5 * rng.randint(0, 1)
+            marks = sorted({0.5 * rng.randint(0, int(route * 2)) for _ in range(rng.randint(8, 25))})
+            cands = stations(*[(m, round(rng.uniform(2.8, 3.4), 3)) for m in marks])
+            start = 0.5 * rng.randint(100, 1000)
+            try:
+                _check_reachable(cands, route, 500, start)
+            except NoFeasiblePlan:
+                continue
+            chosen = _choose_stops(cands, route, 500, 10, start, 25)
+            if chosen is not None:
+                accepted += 1
+                _check_reachable(chosen, route, 500, start)  # must not raise
+        self.assertGreater(accepted, 50)
+
+
+def _near_range_limit(cands, route, max_range, start_fuel, margin=0.25):
+    marks = sorted([0.0, route] + [c.mile for c in cands])
+    gaps = [b - a for i, a in enumerate(marks) for b in marks[i + 1:]]
+    return any(abs(g - max_range) < margin or abs(g - start_fuel) < margin for g in gaps)

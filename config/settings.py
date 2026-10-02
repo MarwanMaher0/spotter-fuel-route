@@ -87,6 +87,7 @@ REST_FRAMEWORK = {
 FUEL_PRICES_CSV = BASE_DIR / "data" / "fuel-prices-for-be-assessment.csv"
 PLACES_CSV = BASE_DIR / "data" / "us_places.csv"
 GEOCODE_OVERRIDES_CSV = BASE_DIR / "data" / "geocode_overrides.csv"
+US_BOUNDARY_JSON = BASE_DIR / "data" / "us_boundary.json"
 
 # --- External services ------------------------------------------------------
 OSRM_BASE_URL = os.environ.get("OSRM_BASE_URL", "https://router.project-osrm.org")
@@ -99,6 +100,9 @@ ROUTE_CACHE_SECONDS = 7 * 24 * 3600
 # --- Vehicle and matching ---------------------------------------------------
 TRUCK_RANGE_MILES = 500.0
 TRUCK_MPG = 10.0
+# Unless the request gives a tank level, the truck leaves with just enough fuel
+# to reach the first station on its route (plus this reserve) and buys the rest.
+START_RESERVE_MILES = 1.0
 # What one fuel stop costs in time off the road. The optimizer weighs it against
 # fuel savings so it does not stop twice in ten miles to save a few cents.
 FUEL_STOP_COST_USD = 25.0
@@ -106,5 +110,5 @@ FUEL_CORRIDOR_MILES = 10.0  # station town centre within this distance of the ro
 NEAR_ROUTE_MILES = 3.0  # this close, a station counts whatever highway it names
 HIGHWAY_MATCH_WINDOW_MILES = 25.0
 ROUTE_SAMPLE_MILES = 0.5
-MAX_MILES_FROM_US_PLACE = 40.0  # farther than this from any US town = not in the USA
+US_BORDER_TOLERANCE_MILES = 0.3  # the outline is generalised and stops at the shore
 ROUTE_SIMPLIFY_DEGREES = 0.001  # ~100 m; only affects the geometry returned

@@ -20,7 +20,11 @@ _HIGHWAY_RE = re.compile(r"\b(I|US)[\s-]*(\d+)\b")
 
 
 class RoutingError(Exception):
-    pass
+    """The routing service failed (HTTP 502)."""
+
+
+class NoRouteFound(RoutingError):
+    """The service works but there is no road between the points (HTTP 422)."""
 
 
 @dataclass
@@ -64,10 +68,12 @@ def fetch_route(start, finish, calls) -> Route:
         response = requests.get(url, params=params, timeout=settings.OSRM_TIMEOUT_SECONDS)
         payload = response.json()
     except (requests.RequestException, ValueError) as exc:
-        raise RoutingError(f"Routing service unavailable: {exc}") from exc
-    if response.status_code != 200 or payload.get("code") != "Ok" or not payload.get("routes"):
-        message = payload.get("message") or payload.get("code") or response.status_code
-        raise RoutingError(f"No route found: {message}")
+        raise RoutingError("Routing service unavailable; please retry.") from exc
+    code = payload.get("code")
+    if code in ("NoRoute", "NoSegment"):
+        raise NoRouteFound("No road route between these points (an island, or water in the way?).")
+    if response.status_code != 200 or code != "Ok" or not payload.get("routes"):
+        raise RoutingError(f"Routing service error: {payload.get('message') or code or response.status_code}")
     return parse_osrm_route(payload["routes"][0])
 
 

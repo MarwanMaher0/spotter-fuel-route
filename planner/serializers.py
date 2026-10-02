@@ -8,7 +8,8 @@ class RoutePlanRequestSerializer(serializers.Serializer):
     start = serializers.CharField(max_length=200, help_text="'City, ST', 'lat,lon' or an address in the USA")
     finish = serializers.CharField(max_length=200, help_text="'City, ST', 'lat,lon' or an address in the USA")
     start_fuel_percent = serializers.FloatField(
-        min_value=0, max_value=100, default=100, help_text="Tank level at the start; default full"
+        min_value=0, max_value=100, required=False, allow_null=True, default=None,
+        help_text="Tank level at the start. Default: just enough to reach the first station",
     )
     stop_cost_usd = serializers.FloatField(
         min_value=0, max_value=1000, required=False,
@@ -19,6 +20,13 @@ class RoutePlanRequestSerializer(serializers.Serializer):
     def validate(self, attrs):
         attrs.setdefault("stop_cost_usd", settings.FUEL_STOP_COST_USD)
         return attrs
+
+
+_START_FUEL_NOTES = {
+    "reach_first_station": "just enough to reach the first station on the route; all other fuel is bought",
+    "given": "as requested with start_fuel_percent",
+    "full_no_stations": "no station near this route, so a full tank is assumed and no fuel is bought",
+}
 
 
 def trip_to_dict(trip, map_url=None, include_geometry=True):
@@ -37,6 +45,7 @@ def trip_to_dict(trip, map_url=None, include_geometry=True):
             "number_of_stops": len(trip.stops),
             "trip_gallons_burned": round(plan.trip_gallons, 2),
             "start_fuel_gallons": round(plan.start_fuel_gallons, 2),
+            "fuel_at_arrival_gallons": round(plan.fuel_at_arrival_gallons, 2),
             "average_price_paid_per_gallon": (
                 round(plan.total_cost / plan.gallons_purchased, 3) if plan.gallons_purchased else None
             ),
@@ -45,7 +54,7 @@ def trip_to_dict(trip, map_url=None, include_geometry=True):
                 "max_range_miles": settings.TRUCK_RANGE_MILES,
                 "tank_gallons": settings.TRUCK_RANGE_MILES / settings.TRUCK_MPG,
                 "stop_cost_usd": trip.stop_cost,
-                "arrives_with_empty_tank": True,
+                "start_fuel": _START_FUEL_NOTES[trip.start_fuel_mode],
             },
         },
         "map_url": map_url,

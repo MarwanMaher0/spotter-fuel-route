@@ -1,3 +1,6 @@
+from unittest import mock
+
+import requests
 from django.core.cache import cache
 from django.test import TestCase, override_settings
 from rest_framework.test import APIClient
@@ -70,17 +73,33 @@ class RoutePlanApiTests(TestCase):
     def test_post_json_body(self):
         with mock_osrm(self.payload):
             response = self.client.post(
-                "/api/route/", {"start": "Chicago, IL", "finish": "Omaha, NE"}, format="json"
+                "/api/route/", {"start": "Chicago, IL", "finish": "Omaha, NE", "start_fuel_percent": 100},
+                format="json",
             )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["fuel_stops"], [])  # a full tank covers 430 miles
+        self.assertGreater(response.json()["summary"]["fuel_at_arrival_gallons"], 0)
+
+    def test_default_buys_the_whole_trips_fuel(self):
+        with mock_osrm(self.payload):
+            body = self.get(start="Chicago, IL", finish="Omaha, NE").json()
+        summary = body["summary"]
+        # Leaves with just enough to reach the first station (mile ~132 + 1 reserve).
+        self.assertAlmostEqual(summary["start_fuel_gallons"], (body["fuel_stops"][0]["mile"] + 1) / 10, delta=0.1)
+        self.assertAlmostEqual(
+            summary["gallons_purchased"] + summary["start_fuel_gallons"], summary["trip_gallons_burned"], delta=0.01
+        )
+        self.assertEqual(summary["fuel_at_arrival_gallons"], 0)
+        self.assertIn("first station", summary["assumptions"]["start_fuel"])
 
     def test_validation_errors(self):
         self.assertEqual(self.get(start="Chicago, IL").status_code, 400)
         self.assertEqual(self.get(start="Chicago, IL", finish="Omaha, NE", start_fuel_percent=150).status_code, 400)
-        response = self.get(start="Paris, France", finish="Omaha, NE")
+        response = self.get(start="Toronto, ON", finish="Omaha, NE")
         self.assertEqual(response.status_code, 400)
-        self.assertIn("not a US state", response.json()["error"])
+        self.assertIn("outside the USA", response.json()["error"])
+        response = self.get(start="49.2827,-123.1207", finish="Seattle, WA")  # Vancouver, BC
+        self.assertEqual(response.status_code, 400)
 
     def test_unreachable_stretch_returns_422(self):
         FuelStation.objects.all().delete()
@@ -90,10 +109,37 @@ class RoutePlanApiTests(TestCase):
         self.assertEqual(response.status_code, 422)
         self.assertIn("gap_start_mile", response.json())
 
-    def test_routing_failure_returns_502(self):
-        with mock_osrm({"code": "NoRoute", "message": "Impossible route"}, status_code=400):
+    def test_no_road_route_returns_422(self):
+        with mock_osrm({"code": "NoRoute", "message": "Impossible route between points"}, status_code=400):
+            response = self.get(start="Honolulu, HI", finish="Los Angeles, CA")
+        self.assertEqual(response.status_code, 422)
+
+    def test_routing_service_failure_returns_502(self):
+        with mock_osrm({"code": "Error", "message": "boom"}, status_code=500):
             response = self.get(start="Chicago, IL", finish="Omaha, NE")
         self.assertEqual(response.status_code, 502)
+
+    def test_street_address_uses_one_geocoding_call(self):
+        nominatim = mock.Mock(status_code=200)
+        nominatim.json.return_value = [{"lat": "41.8789", "lon": "-87.6359", "display_name": "Willis Tower, Chicago"}]
+        osrm = mock.Mock(status_code=200)
+        osrm.json.return_value = self.payload
+
+        def fake_get(url, **kwargs):
+            return nominatim if "nominatim" in url else osrm
+
+        # geocoding and routing share the `requests` module, so one patch serves both.
+        with mock.patch("requests.get", side_effect=fake_get) as get:
+            body = self.get(start="233 S Wacker Dr, Chicago, IL 60606", finish="Omaha, NE").json()
+        self.assertEqual(get.call_count, 2)
+        self.assertEqual(body["start"]["source"], "nominatim")
+        self.assertEqual(body["meta"]["external_api_calls_detail"], ["nominatim.search", "osrm.route"])
+
+    def test_geocoder_outage_returns_502(self):
+        with mock.patch("requests.get", side_effect=requests.ConnectionError("down")):
+            response = self.get(start="233 S Wacker Dr, Chicago, IL", finish="Omaha, NE")
+        self.assertEqual(response.status_code, 502)
+        self.assertNotIn("down", response.json()["error"])
 
     def test_map_page_renders(self):
         with mock_osrm(self.payload):

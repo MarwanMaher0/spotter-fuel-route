@@ -63,8 +63,24 @@ class ResolveLocationTests(SimpleTestCase):
         loc = resolve_location("35.4676,-97.5164", ExternalCalls())
         self.assertEqual((loc.lat, loc.lon, loc.source), (35.4676, -97.5164, "coordinates"))
 
+    def test_zip_code_is_ignored_offline(self):
+        calls = ExternalCalls()
+        loc = resolve_location("Denver, CO 80202", calls)
+        self.assertEqual((loc.source, calls.made), ("census_gazetteer", []))
+
     def test_rejects_points_outside_usa(self):
-        with self.assertRaises(LocationError):
-            resolve_location("48.8566,2.3522", ExternalCalls())  # Paris
-        with self.assertRaises(LocationError):
-            resolve_location("Toronto, ON", ExternalCalls())
+        for text in [
+            "48.8566,2.3522",  # Paris
+            "49.2827,-123.1207",  # Vancouver, just over the border
+            "32.5149,-117.0382",  # Tijuana
+            "42.3149,-83.0364",  # Windsor, across the river from Detroit
+            "Toronto, ON",
+            "Monterrey, Mexico",
+        ]:
+            with self.subTest(text=text), self.assertRaises(LocationError):
+                resolve_location(text, ExternalCalls())
+
+    def test_accepts_points_on_the_us_shore(self):
+        for text in ["41.8781,-87.6298", "25.7617,-80.1918", "37.7955,-122.3937", "42.3314,-83.0458"]:
+            with self.subTest(text=text):
+                self.assertEqual(resolve_location(text, ExternalCalls()).source, "coordinates")

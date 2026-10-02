@@ -124,7 +124,49 @@
             }
           ]
         },
-        "description": "Compare with the default: four stops instead of one, about $5 cheaper."
+        "description": "Compare with the default: 11 stops instead of 2, about $24 cheaper. A quarter-gallon top-up shows why stop cost matters."
+      },
+      "response": []
+    },
+    {
+      "name": "Full tank at the start",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/route/?start=Chicago, IL&finish=Dallas, TX&start_fuel_percent=100&include_geometry=false",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "route"
+          ],
+          "query": [
+            {
+              "key": "start",
+              "value": "Chicago, IL"
+            },
+            {
+              "key": "finish",
+              "value": "Dallas, TX"
+            },
+            {
+              "key": "start_fuel_percent",
+              "value": "100"
+            },
+            {
+              "key": "include_geometry",
+              "value": "false"
+            }
+          ]
+        },
+        "description": "Leaves full: one stop, and the total covers only fuel bought on the way."
       },
       "response": []
     },
@@ -166,7 +208,45 @@
             }
           ]
         },
-        "description": "Seattle to Miami from raw coordinates, leaving with half a tank."
+        "description": "Seattle to Miami from raw coordinates, leaving with half a tank (the total then covers only fuel bought on the way)."
+      },
+      "response": []
+    },
+    {
+      "name": "Street address (one geocoding call)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/route/?start=233 S Wacker Dr, Chicago, IL 60606&finish=Denver, CO&include_geometry=false",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "route"
+          ],
+          "query": [
+            {
+              "key": "start",
+              "value": "233 S Wacker Dr, Chicago, IL 60606"
+            },
+            {
+              "key": "finish",
+              "value": "Denver, CO"
+            },
+            {
+              "key": "include_geometry",
+              "value": "false"
+            }
+          ]
+        },
+        "description": "A street address costs one Nominatim call; meta shows nominatim.search + osrm.route."
       },
       "response": []
     },

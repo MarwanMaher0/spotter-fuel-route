@@ -69,6 +69,10 @@ class FuelPlan:
     def trip_gallons(self) -> float:
         return self.route_miles / self.mpg
 
+    @property
+    def fuel_at_arrival_gallons(self) -> float:
+        return max(0.0, self.start_fuel_gallons + self.gallons_purchased - self.trip_gallons)
+
 
 class NoFeasiblePlan(Exception):
     """The route has a stretch longer than the tank range with no station."""
@@ -92,7 +96,7 @@ def plan_fuel_stops(candidates, route_miles, *, max_range=500.0, mpg=10.0, start
     route_miles  total route length
     max_range    miles on a full tank
     mpg          miles per gallon
-    start_fuel   miles of fuel in the tank at the origin (default: full)
+    start_fuel   miles of fuel in the tank at the origin (default: full tank)
     stop_cost    dollars charged per fuel stop when choosing where to stop
                  (not included in the returned fuel cost)
     """
@@ -109,11 +113,10 @@ def plan_fuel_stops(candidates, route_miles, *, max_range=500.0, mpg=10.0, start
     if stop_cost > 0 and stations:
         chosen = _choose_stops(stations, route_miles, max_range, mpg, start_fuel, stop_cost)
         if chosen is not None:
-            try:
-                _check_reachable(chosen, route_miles, max_range, start_fuel)
-                stations = chosen
-            except NoFeasiblePlan:
-                pass  # rounding left a gap; fall back to every station
+            _check_reachable(chosen, route_miles, max_range, start_fuel)  # guaranteed by the DP margins
+            stations = chosen
+        # else: only possible when a stretch is within 0.2 miles of the range;
+        # plan with every station, ignoring the stop cost.
 
     return _greedy(stations, route_miles, max_range, mpg, start_fuel)
 
@@ -176,43 +179,52 @@ def _greedy(stations, route_miles, max_range, mpg, start_fuel):
     )
 
 
-def _choose_stops(stations, route_miles, max_range, mpg, start_fuel, stop_cost):
+def _choose_stops(stations, route_miles, max_range, mpg, start_fuel, stop_cost, resolution=0.1):
     """Pick the stations to stop at, minimising fuel cost + stop_cost per stop.
 
-    Dynamic program over (station, fuel in the tank) with fuel counted in whole
-    miles. Walking the stations in route order, the cost-so-far for every fuel
-    level is shifted down by the distance driven; at a station the truck may
-    also stop, pay stop_cost, and buy up to any higher level. "Best level to
-    buy up from" is a running minimum, so each station costs O(tank size) numpy
-    work and the whole route takes a few milliseconds.
+    Dynamic program over (station, fuel in the tank), with fuel counted in
+    steps of `resolution` miles. Walking the stations in route order, the
+    cost-so-far for every fuel level is shifted down by the distance driven; at
+    a station the truck may also stop, pay stop_cost, and buy up to any higher
+    level. "Best level to buy up from" is a running minimum, so each station
+    costs O(tank size) numpy work and a whole route takes a few milliseconds.
+
+    Rounding positions to the grid can misjudge any stretch by less than one
+    step (the errors telescope). The tank, the starting fuel and the final leg
+    are therefore each given one step of margin, which makes every plan the DP
+    accepts truly feasible; the price is that a stretch within 0.1-0.2 miles of
+    the full range counts as too long.
 
     Returns the chosen stations (the greedy then computes exact amounts), or
-    None if rounding to whole miles made the trip look infeasible.
+    None if no plan fits inside the margins.
     """
-    levels = int(np.floor(max_range)) + 1
-    fuel_levels = np.arange(levels)
-    cost = np.full(levels, np.inf)
-    cost[min(int(np.floor(start_fuel)), levels - 1)] = 0.0
+    capacity = int(np.floor(max_range / resolution + _EPS)) - 1
+    levels = np.arange(capacity + 1)
+    cost = np.full(capacity + 1, np.inf)
+    start_level = min(int(np.floor(start_fuel / resolution + _EPS)) - 1, capacity)
+    if start_level < 0:
+        return None
+    cost[start_level] = 0.0
 
+    grid = [round(station.mile / resolution) for station in stations]
     position = 0
     choices = []  # per station: fuel level bought up from, or -1 for "no stop"
-    for station in stations:
-        here = int(round(station.mile))
+    for station, here in zip(stations, grid):
         cost = _drive(cost, here - position)
         position = here
 
-        per_mile = station.price / mpg
-        adjusted = cost - fuel_levels * per_mile
+        per_step = station.price / mpg * resolution
+        adjusted = cost - levels * per_step
         best = np.minimum.accumulate(adjusted)
-        best_from = np.maximum.accumulate(np.where(adjusted == best, fuel_levels, -1))
-        stop = best + fuel_levels * per_mile + stop_cost
+        best_from = np.maximum.accumulate(np.where(adjusted == best, levels, -1))
+        stop = best + levels * per_step + stop_cost
 
         stopping = stop < cost
         cost = np.where(stopping, stop, cost)
-        choices.append(np.where(stopping, best_from, -1).astype(np.int16))
+        choices.append(np.where(stopping, best_from, -1).astype(np.int32))
 
-    remaining = int(np.ceil(route_miles - position - _EPS))
-    if remaining >= levels or not np.isfinite(cost[remaining:]).any():
+    remaining = int(np.ceil(route_miles / resolution - position - _EPS)) + 1
+    if remaining > capacity or not np.isfinite(cost[remaining:]).any():
         return None
     level = remaining + int(np.argmin(cost[remaining:]))
 
@@ -223,7 +235,7 @@ def _choose_stops(stations, route_miles, max_range, mpg, start_fuel, stop_cost):
             chosen.append(stations[index])
             level = int(bought_from)
         if index > 0:
-            level += int(round(stations[index].mile)) - int(round(stations[index - 1].mile))
+            level += grid[index] - grid[index - 1]
     chosen.reverse()
     return chosen
 

@@ -1,0 +1,497 @@
+state,name,lat,lon
+AL,Auburn city,32.60986,-85.48078
+AL,Birmingham city,33.52068,-86.80243
+AL,Dauphin Island town,30.25420,-88.11248
+AL,Decatur city,34.60602,-86.98382
+AL,Dothan city,31.22373,-85.39344
+AL,Eufaula city,31.89127,-85.14549
+AL,Fort Payne city,34.44425,-85.71969
+AL,Guntersville city,34.35815,-86.29470
+AL,Huntsville city,34.72985,-86.58590
+AL,Mobile city,30.69135,-88.04375
+AL,Montgomery city,32.37771,-86.30908
+AL,Opelika city,32.64541,-85.37828
+AL,Scottsboro city,34.67313,-86.03388
+AL,Tuscaloosa city,33.20956,-87.56753
+AK,Adak city,51.87361,-176.63903
+AK,Akutan city,54.13449,-165.77799
+AK,Aleknagik city,59.27915,-158.62057
+AK,Aleneva CDP,58.00632,-152.88209
+AK,Anchorage municipality,61.21631,-149.89485
+AK,Anchor Point CDP,59.78056,-151.83930
+AK,Arctic Village CDP,68.12694,-145.53778
+AK,Atka city,52.19845,-174.19831
+AK,Badger CDP,64.80689,-147.40799
+AK,Beluga CDP,61.14111,-151.08278
+AK,Big Lake CDP,61.54175,-149.83035
+AK,Cantwell CDP,63.39218,-148.95386
+AK,Central CDP,65.57207,-144.80457
+AK,Chase CDP,62.47172,-150.01934
+AK,Chickaloon CDP,61.79776,-148.37117
+AK,Chicken CDP,64.07276,-141.93651
+AK,Chisana CDP,62.06611,-142.04083
+AK,Chistochina CDP,62.56503,-144.66519
+AK,Chitina CDP,61.51693,-144.44026
+AK,Circle CDP,65.82701,-144.06437
+AK,Cold Bay city,55.20716,-162.71465
+AK,Cooper Landing CDP,60.48983,-149.83284
+AK,Cordova city,60.54434,-145.75951
+AK,Crooked Creek CDP,61.86638,-158.12824
+AK,Dot Lake CDP,63.66172,-144.06368
+AK,Dry Creek CDP,63.65333,-144.66528
+AK,Egegik city,58.21298,-157.37346
+AK,Elfin Cove CDP,58.19444,-136.34333
+AK,Ester CDP,64.84722,-148.01444
+AK,Eureka Roadhouse CDP,61.93809,-147.16786
+AK,Excursion Inlet CDP,58.41889,-135.42667
+AK,False Pass city,54.85526,-163.41537
+AK,Ferry CDP,64.01667,-149.11667
+AK,Flat CDP,62.45361,-158.00750
+AK,Fox River CDP,59.85833,-150.95833
+AK,Fritz Creek CDP,59.71267,-151.33555
+AK,Gakona CDP,62.30119,-145.30353
+AK,Gambell city,63.77798,-171.72795
+AK,Glennallen CDP,62.10725,-145.53020
+AK,Gustavus city,58.41242,-135.73078
+AK,Healy CDP,63.86964,-149.01919
+AK,Healy Lake CDP,64.00003,-144.73214
+AK,Hobart Bay CDP,57.46583,-133.35333
+AK,Hollis CDP,55.48505,-132.63690
+AK,Hope CDP,60.91750,-149.63990
+AK,Juneau city and borough,58.30196,-134.41968
+AK,Kalifornsky CDP,60.48805,-151.15445
+AK,Karluk CDP,57.56431,-154.43645
+AK,Kenny Lake CDP,61.73718,-144.94207
+AK,King Salmon CDP,58.68843,-156.66184
+AK,Knik River CDP,61.47505,-148.98690
+AK,Lake Louise CDP,62.32719,-146.56019
+AK,Lake Minchumina CDP,63.88278,-152.31222
+AK,Lazy Mountain CDP,61.64771,-148.97065
+AK,Lime Village CDP,61.35639,-155.43556
+AK,Livengood CDP,65.52444,-148.54472
+AK,Lutak CDP,59.34111,-135.56556
+AK,McCarthy CDP,61.43333,-142.92167
+AK,Manley Hot Springs CDP,65.00111,-150.63389
+AK,Manokotak city,58.98044,-159.05803
+AK,Meadow Lakes CDP,61.62472,-149.60111
+AK,Mendeltna CDP,62.06683,-146.44786
+AK,Mentasta Lake CDP,62.92919,-143.79927
+AK,Mosquito Lake CDP,59.43166,-136.18756
+AK,Nabesna CDP,62.37133,-143.01263
+AK,Naknek CDP,58.72666,-157.01843
+AK,Nelson Lagoon CDP,56.00012,-161.20259
+AK,Nightmute city,60.47944,-164.72389
+AK,Nikiski CDP,60.69028,-151.28889
+AK,Nikolski CDP,52.93806,-168.86778
+AK,Ninilchik CDP,60.04004,-151.67612
+AK,Northway CDP,62.96208,-141.93675
+AK,Paxson CDP,63.03283,-145.49695
+AK,Petersville CDP,62.49623,-150.76793
+AK,Pilot Point city,57.56417,-157.57917
+AK,Point MacKenzie CDP,61.33903,-150.09673
+AK,Prudhoe Bay CDP,70.24501,-148.39784
+AK,Rampart CDP,65.50500,-150.17000
+AK,Red Dog Mine CDP,68.07235,-162.85909
+AK,St. George city,56.60229,-169.54453
+AK,St. Paul city,57.12222,-170.27500
+AK,Salcha CDP,64.47056,-146.93861
+AK,Sand Point city,55.34058,-160.49785
+AK,Skwentna CDP,61.96929,-151.22118
+AK,Sleetmute CDP,61.70066,-157.17174
+AK,South Naknek CDP,58.71556,-156.99806
+AK,Steele Creek CDP,64.88501,-147.58877
+AK,Sterling CDP,60.53754,-150.79774
+AK,Susitna CDP,61.54335,-150.51579
+AK,Sutton-Alpine CDP,61.79822,-148.80591
+AK,Talkeetna CDP,62.32348,-150.11257
+AK,Tanacross CDP,63.37786,-143.36240
+AK,Tetlin CDP,63.13726,-142.51800
+AK,Togiak city,59.06194,-160.37639
+AK,Tok CDP,63.33667,-142.98556
+AK,Toksook Bay city,60.53074,-165.10803
+AK,Tonsina CDP,61.65583,-145.17528
+AK,Trapper Creek CDP,62.31661,-150.23260
+AK,Tuntutuliak CDP,60.34335,-162.66618
+AK,Tununak CDP,60.60547,-165.25038
+AK,Tyonek CDP,61.06843,-151.14091
+AK,Ugashik CDP,57.51306,-157.39750
+AK,Unalaska city,53.87358,-166.53287
+AK,Valdez city,61.12994,-146.34936
+AK,Wainwright city,70.63694,-160.03833
+AK,Willow CDP,61.74722,-150.03750
+AK,Wiseman CDP,67.41008,-150.10914
+AK,Wrangell city and borough,56.47060,-132.38294
+AK,Yakutat CDP,59.55200,-139.73257
+AZ,Bouse CDP,33.93252,-114.00577
+AZ,Buckeye city,33.37032,-112.58378
+AZ,Bullhead City city,35.14500,-114.56278
+AZ,Casa Grande city,32.87728,-111.75368
+AZ,Chandler city,33.30620,-111.84118
+AZ,Chino Valley town,34.75752,-112.45378
+AZ,Coolidge city,32.97784,-111.51762
+AZ,Dolan Springs CDP,35.59101,-114.27419
+AZ,Eloy city,32.75517,-111.55349
+AZ,Flagstaff city,35.19875,-111.65182
+AZ,Florence town,33.03145,-111.38734
+AZ,Fort Valley CDP,35.26799,-111.72848
+AZ,Gila Bend town,32.94762,-112.71450
+AZ,Gilbert town,33.35276,-111.78904
+AZ,Glendale city,33.53869,-112.18599
+AZ,Golden Valley CDP,35.22333,-114.22301
+AZ,Goodyear city,33.46723,-112.38535
+AZ,Marana town,32.44837,-111.21147
+AZ,Mesa city,33.41510,-111.83146
+AZ,New River CDP,33.91587,-112.13599
+AZ,North Fork CDP,33.87783,-109.95667
+AZ,Parks CDP,35.26062,-111.94855
+AZ,Paulden CDP,34.89552,-112.46658
+AZ,Peoria city,33.58061,-112.23729
+AZ,Phoenix city,33.44844,-112.07414
+AZ,Picture Rocks CDP,32.32790,-111.21826
+AZ,Rio Rico CDP,31.47148,-110.97648
+AZ,San Tan Valley CDP,33.17981,-111.58493
+AZ,Scottsdale city,33.49422,-111.92602
+AZ,Show Low city,34.25421,-110.02983
+AZ,Sierra Vista city,31.56477,-110.27430
+AZ,Surprise city,33.62925,-112.36814
+AZ,Tucson city,32.22288,-110.97485
+AZ,Valle CDP,35.65302,-112.13843
+AZ,Vicksburg CDP,33.74413,-113.75265
+AZ,Whetstone CDP,31.69287,-110.35029
+AZ,White Hills CDP,35.73276,-114.32847
+AZ,Williamson CDP,34.69007,-112.54012
+AZ,Yuma city,32.72103,-114.62032
+AR,Fayetteville city,36.06258,-94.15743
+AR,Fort Smith city,35.38803,-94.42650
+AR,Hot Springs Village CDP,34.67957,-92.99839
+AR,Jonesboro city,35.83481,-90.70453
+AR,Little Rock city,34.74651,-92.28963
+AR,North Little Rock city,34.76954,-92.26709
+CA,Adelanto city,34.58381,-117.40825
+CA,Anaheim city,33.83475,-117.91173
+CA,Apple Valley town,34.50083,-117.18588
+CA,Bakersfield city,35.37387,-119.01946
+CA,Berry Creek CDP,39.63503,-121.39096
+CA,Brisbane city,37.68717,-122.40279
+CA,California City city,35.12593,-117.95987
+CA,Coronado city,32.69152,-117.17669
+CA,Durham CDP,39.64606,-121.80012
+CA,Foster City city,37.56003,-122.26885
+CA,Fremont city,37.54827,-121.98857
+CA,Fresno city,36.73944,-119.78483
+CA,Hat Creek CDP,40.83044,-121.51359
+CA,Hayfork CDP,40.55431,-123.18308
+CA,Hayward city,37.66882,-122.08080
+CA,Hesperia city,34.42204,-117.30469
+CA,Irvine city,33.68570,-117.82598
+CA,Lancaster city,34.69811,-118.13662
+CA,Long Beach city,33.76902,-118.19160
+CA,Los Angeles city,34.05369,-118.24277
+CA,Lucerne Valley CDP,34.44389,-116.96781
+CA,Malibu city,34.03559,-118.68942
+CA,Mojave CDP,35.05247,-118.17396
+CA,Moreno Valley city,33.93752,-117.23058
+CA,Newport Beach city,33.61701,-117.92944
+CA,Oakland city,37.80446,-122.27136
+CA,Palmdale city,34.57931,-118.11711
+CA,Palm Springs city,33.82463,-116.54030
+CA,Phelan CDP,34.42651,-117.57307
+CA,Rancho Palos Verdes city,33.74833,-118.37077
+CA,Redding city,40.58636,-122.39168
+CA,Redwood City city,37.48632,-122.23252
+CA,Richmond city,37.93576,-122.34775
+CA,Riverside city,33.98249,-117.37424
+CA,Rosamond CDP,34.86414,-118.16341
+CA,Sacramento city,38.58106,-121.49389
+CA,Sage CDP,33.58169,-116.93225
+CA,San Bernardino city,34.10816,-117.28946
+CA,San Diego city,32.71571,-117.16383
+CA,San Francisco city,37.78794,-122.40752
+CA,San Jose city,37.33617,-121.89059
+CA,Santa Barbara city,34.42213,-119.70267
+CA,Santa Clarita city,34.41280,-118.55381
+CA,South San Francisco city,37.65354,-122.41687
+CA,Squaw Valley CDP,36.74050,-119.24701
+CA,Stockton city,37.95770,-121.29078
+CA,Thousand Oaks city,34.17056,-118.83759
+CA,Twentynine Palms city,34.13569,-116.05435
+CA,Vallejo city,38.10409,-122.25664
+CA,Victorville city,34.53611,-117.29116
+CO,Aurora city,39.74014,-104.87334
+CO,Black Forest CDP,39.01400,-104.70114
+CO,Colorado Springs city,38.83396,-104.82535
+CO,Denver city,39.73924,-104.98486
+CO,Fort Collins city,40.58718,-105.07701
+CO,Greeley city,40.42331,-104.70913
+CO,Pueblo city,38.26400,-104.61419
+DC,Washington city,38.89510,-77.03638
+FL,Alturas CDP,27.87169,-81.71508
+FL,Bunnell city,29.46577,-81.25768
+FL,Cape Coral city,26.56257,-81.94388
+FL,Coral Gables city,25.73311,-80.25851
+FL,Daytona Beach city,29.21081,-81.02283
+FL,Fellsmere city,27.76779,-80.60137
+FL,Gainesville city,29.65197,-82.32498
+FL,Gulf Breeze city,30.36129,-87.16834
+FL,Hutchinson Island South CDP,27.33981,-80.21992
+FL,Jacksonville city,30.32622,-81.65792
+FL,Lakeland city,28.03947,-81.94980
+FL,Lehigh Acres CDP,26.60406,-81.65813
+FL,Merritt Island CDP,28.35812,-80.69684
+FL,Miami city,25.77416,-80.19360
+FL,Newberry city,29.64635,-82.60650
+FL,North Port city,27.04422,-82.23593
+FL,Orlando city,28.54212,-81.37905
+FL,Palm Bay city,27.99470,-80.63661
+FL,Palm Beach Gardens city,26.82339,-80.13865
+FL,Palm Coast city,29.55414,-81.22077
+FL,Pensacola city,30.42131,-87.21691
+FL,Poinciana CDP,28.17433,-81.49322
+FL,Port St. Lucie city,27.29393,-80.35033
+FL,Punta Gorda city,26.93515,-82.05121
+FL,St. Petersburg city,27.77123,-82.63403
+FL,Sanibel city,26.44897,-82.02231
+FL,Spring Hill CDP,28.46353,-82.53636
+FL,Tallahassee city,30.43808,-84.28093
+FL,Tampa city,27.94499,-82.45831
+FL,West Palm Beach city,26.71536,-80.05329
+FL,Wildwood city,28.86529,-82.03943
+GA,Albany city,31.57821,-84.15568
+GA,Atlanta city,33.75447,-84.38982
+GA,Chattahoochee Hills city,33.57909,-84.76867
+GA,Columbus city,32.46107,-84.98804
+GA,Savannah city,32.07901,-81.09213
+GA,South Fulton city,33.59027,-84.67123
+HI,Hilo CDP,19.70737,-155.08158
+HI,Mountain View CDP,19.55063,-155.10718
+ID,Boise City city,43.61662,-116.20089
+IL,Chicago city,41.87556,-87.62442
+IL,Joliet city,41.52636,-88.08402
+IL,Rockford city,42.27139,-89.09397
+IL,Springfield city,39.79902,-89.64396
+IN,Fort Wayne city,41.07999,-85.13860
+IN,Zionsville town,39.95072,-86.26170
+IA,Cedar Rapids city,41.97589,-91.67041
+IA,Davenport city,41.52247,-90.57564
+IA,Des Moines city,41.58687,-93.62495
+IA,Sioux City city,42.49668,-96.40588
+IA,Waterloo city,42.49827,-92.33287
+KS,Kansas City city,39.11346,-94.62650
+KS,Olathe city,38.88389,-94.81887
+KS,Overland Park city,38.97425,-94.68517
+KS,Topeka city,39.04901,-95.67756
+KS,Wichita city,37.69224,-97.33754
+KY,Lexington-Fayette urban county,38.04641,-84.49704
+KY,Louisville city,38.25424,-85.75941
+LA,Baton Rouge city,30.44942,-91.18697
+LA,Central city,30.55423,-91.03672
+LA,Lafayette city,30.22622,-92.01782
+LA,New Orleans city,29.95614,-90.07339
+LA,Shreveport city,32.51354,-93.74778
+ME,Auburn city,44.09659,-70.22507
+ME,Augusta city,44.31480,-69.77439
+ME,Biddeford city,43.49258,-70.45338
+ME,Caribou city,46.86063,-68.01168
+ME,Ellsworth city,44.54146,-68.42436
+ME,Old Orchard Beach CDP,43.51580,-70.37433
+ME,Portland city,43.65736,-70.25866
+ME,Presque Isle city,46.68122,-68.01546
+MD,Baltimore city,39.29088,-76.61076
+MA,Barnstable Town city,41.66379,-70.30302
+MA,Boston city,42.35883,-71.05783
+MA,Gloucester city,42.61536,-70.66246
+MA,Hull CDP,42.30204,-70.90782
+MA,Marblehead CDP,42.50010,-70.85783
+MI,Detroit city,42.33155,-83.04664
+MN,Babbitt city,47.70871,-91.94409
+MN,Duluth city,46.78383,-92.10527
+MN,Hibbing city,47.42715,-92.93769
+MN,Hoyt Lakes city,47.51965,-92.13851
+MN,Minneapolis city,44.97730,-93.26547
+MN,Mountain Iron city,47.53287,-92.62269
+MN,Rochester city,44.02344,-92.46302
+MN,St. Paul city,44.94975,-93.09310
+MS,Biloxi city,30.40076,-88.88938
+MS,Gulfport city,30.36742,-89.09282
+MS,Hattiesburg city,31.32712,-89.29034
+MS,Jackson city,32.29987,-90.18304
+MS,Meridian city,32.36431,-88.70366
+MS,Olive Branch city,34.96176,-89.82953
+MS,Tupelo city,34.25761,-88.70339
+MO,Columbia city,38.95188,-92.33374
+MO,Independence city,39.09248,-94.41379
+MO,Kansas City city,39.10010,-94.57814
+MO,Lee's Summit city,38.91072,-94.38213
+MO,St. Louis city,38.62541,-90.19001
+MO,Springfield city,37.20817,-93.29227
+MO,Wildwood city,38.58069,-90.63144
+MT,Big Sky CDP,45.25896,-111.30872
+MT,Helena Valley Northeast CDP,46.70801,-111.95461
+MT,Lame Deer CDP,45.62305,-106.66670
+MT,Sedan CDP,45.95882,-110.85105
+MT,Trego CDP,48.70571,-114.86945
+MT,Wheatland CDP,45.93227,-111.60444
+NE,Lincoln city,40.80889,-96.70778
+NE,Omaha city,41.25875,-95.93838
+NV,Amargosa Valley CDP,36.56899,-116.46122
+NV,Boulder City city,35.97876,-114.83376
+NV,Caliente city,37.61496,-114.51054
+NV,Carson City,39.16633,-119.76704
+NV,Enterprise CDP,36.04057,-115.19016
+NV,Fernley city,39.60788,-119.25065
+NV,Henderson city,36.03196,-114.98227
+NV,Las Vegas city,36.16743,-115.14841
+NV,North Las Vegas city,36.20052,-115.12147
+NV,Owyhee CDP,41.94751,-116.09843
+NV,Pahrump CDP,36.19252,-115.97584
+NV,Reno city,39.52618,-119.81266
+NV,Sandy Valley CDP,35.80879,-115.62441
+NV,Silver Springs CDP,39.41568,-119.22399
+NV,Smith Valley CDP,38.75254,-119.36917
+NV,Spanish Springs CDP,39.63948,-119.71038
+NV,Spring Creek CDP,40.73749,-115.59722
+NH,Berlin city,44.46966,-71.18107
+NH,Concord city,43.20718,-71.53748
+NJ,Estell Manor city,39.41206,-74.74239
+NJ,Vineland city,39.48628,-75.02543
+NM,Albuquerque city,35.08410,-106.65099
+NM,Chaparral CDP,32.02387,-106.40895
+NM,Crownpoint CDP,35.68733,-108.14430
+NM,Edgewood town,35.06130,-106.19111
+NM,Lake Sumner CDP,34.61122,-104.36568
+NM,Las Cruces city,32.31404,-106.77981
+NM,Pie Town CDP,34.29964,-108.13254
+NM,Rio Rancho city,35.31082,-106.68475
+NM,Rio Rancho Estates CDP,35.23846,-106.68521
+NM,Santa Fe city,35.68761,-105.93846
+NY,Fire Island CDP,40.64760,-73.14595
+NY,Montauk CDP,41.03472,-71.94426
+NY,New York city,40.71273,-74.00602
+NY,Rome city,43.21022,-75.45840
+NC,Cary town,35.78736,-78.78116
+NC,Charlotte city,35.22721,-80.84308
+NC,Concord city,35.40942,-80.58000
+NC,Durham city,35.99665,-78.90181
+NC,Fayetteville city,35.05258,-78.87829
+NC,Gastonia city,35.26227,-81.18382
+NC,Greensboro city,36.07264,-79.79198
+NC,High Point city,35.95569,-80.00532
+NC,Raleigh city,35.78040,-78.63910
+NC,Wilmington city,34.23529,-77.94873
+NC,Winston-Salem city,36.09981,-80.24405
+ND,Cannon Ball CDP,46.38957,-100.59682
+ND,Fargo city,46.87723,-96.78982
+OH,Akron city,41.08306,-81.51848
+OH,Cincinnati city,39.10128,-84.51274
+OH,Cleveland city,41.49966,-81.69368
+OH,Columbus city,39.96226,-83.00071
+OH,Dayton city,39.75895,-84.19161
+OH,Toledo city,41.65291,-83.53782
+OK,Bray town,34.63786,-97.81753
+OK,Broken Arrow city,36.05260,-95.79082
+OK,Central High town,34.62313,-98.08976
+OK,Edmond city,35.65714,-97.46490
+OK,El Reno city,35.53220,-97.95506
+OK,Enid city,36.39676,-97.87913
+OK,Lawton city,34.60520,-98.39523
+OK,Newcastle city,35.24729,-97.59976
+OK,Norman city,35.22257,-97.43948
+OK,Oklahoma City city,35.47299,-97.51705
+OK,Tulsa city,36.15631,-95.99275
+OK,Union City town,35.39172,-97.94144
+OR,Portland city,45.52025,-122.67419
+PA,Philadelphia city,39.95272,-75.16353
+PA,Pittsburgh city,40.44070,-80.00257
+PA,St. Marys city,41.42798,-78.56110
+SC,Bluffton town,32.23715,-80.86039
+SC,Charleston city,32.78844,-79.93993
+SC,Columbia city,34.00075,-81.03523
+SC,Hardeeville city,32.28027,-81.07261
+SC,Hilton Head Island town,32.16185,-80.75126
+SC,North Charleston city,32.85462,-79.97481
+SD,Rapid City city,44.08060,-103.22802
+SD,Sioux Falls city,43.54760,-96.72936
+TN,Chattanooga city,35.04572,-85.30949
+TN,Clarksville city,36.52776,-87.35887
+TN,Jackson city,35.61444,-88.81774
+TN,Kingsport city,36.55024,-82.55943
+TN,Knoxville city,35.96039,-83.92103
+TN,Memphis city,35.14603,-90.05178
+TN,Murfreesboro city,35.84604,-86.39211
+TN,Oak Ridge city,36.01036,-84.26964
+TX,Abilene city,32.44645,-99.74759
+TX,Amarillo city,35.20729,-101.83712
+TX,Aransas Pass city,27.90967,-97.15039
+TX,Arlington city,32.73558,-97.10712
+TX,Austin city,30.27113,-97.74370
+TX,Beaumont city,30.08293,-94.09843
+TX,Brownsville city,25.90243,-97.49817
+TX,Bryan city,30.67436,-96.36996
+TX,Canyon Lake CDP,29.86432,-98.24378
+TX,College Station city,30.61839,-96.34560
+TX,Conroe city,30.31188,-95.45605
+TX,Corpus Christi city,27.76353,-97.40332
+TX,Dallas city,32.77627,-96.79686
+TX,Denton city,33.21504,-97.13304
+TX,El Paso city,31.76010,-106.48705
+TX,Fort Worth city,32.75318,-97.33275
+TX,Frisco city,33.15060,-96.82382
+TX,Galveston city,29.30570,-94.79333
+TX,Garland city,32.91262,-96.63888
+TX,Georgetown city,30.63702,-97.67756
+TX,Grand Prairie city,32.74596,-96.99778
+TX,Harper CDP,30.30073,-99.25084
+TX,Hitchcock city,29.34829,-95.01604
+TX,Houston city,29.75894,-95.36770
+TX,Inez CDP,28.90416,-96.78841
+TX,Irving city,32.82952,-96.94422
+TX,Killeen city,31.11714,-97.72780
+TX,Laredo city,27.50792,-99.50698
+TX,League City city,29.50745,-95.09493
+TX,Longview city,32.50070,-94.74049
+TX,Lubbock city,33.58557,-101.84702
+TX,McAllen city,26.20411,-98.23006
+TX,McKinney city,33.19765,-96.61545
+TX,Midland city,31.99737,-102.07795
+TX,Midlothian city,32.48236,-96.99445
+TX,Odessa city,31.84571,-102.36769
+TX,Plano city,33.01368,-96.69251
+TX,Port Arthur city,29.87166,-93.93323
+TX,San Angelo city,31.46497,-100.44051
+TX,San Antonio city,29.42460,-98.49514
+TX,Seabrook city,29.56332,-95.01972
+TX,Temple city,31.09837,-97.34296
+TX,Texas City city,29.39601,-94.91755
+TX,Tyler city,32.35126,-95.30106
+TX,Waco city,31.55451,-97.13256
+TX,West Odessa CDP,31.84008,-102.47828
+TX,Wichita Falls city,33.90046,-98.50208
+UT,Eagle Mountain city,40.30935,-112.01198
+UT,Hooper city,41.16433,-112.12345
+UT,Hurricane city,37.17503,-113.28989
+UT,St. George city,37.10988,-113.58321
+UT,Salt Lake City city,40.75962,-111.88680
+VA,Chesapeake city,36.71683,-76.24945
+VA,Chincoteague town,37.93318,-75.37881
+VA,Hampton city,37.02644,-76.34428
+VA,Newport News city,36.97750,-76.42977
+VA,Norfolk city,36.84937,-76.28995
+VA,Poquoson city,37.12419,-76.39215
+VA,Richmond city,37.53851,-77.43428
+VA,Suffolk city,36.72813,-76.58347
+VA,Virginia Beach city,36.84966,-75.97608
+WA,Bainbridge Island city,47.65151,-122.52468
+WA,Camano CDP,48.15336,-122.47888
+WA,Everett city,47.97934,-122.21270
+WA,Hansville CDP,47.91870,-122.55431
+WA,Seattle city,47.60383,-122.33006
+WA,Spokane city,47.65719,-117.42351
+WA,Vashon CDP,47.44805,-122.46067
+WI,Kronenwetter village,44.82905,-89.65972
+WI,Lake Koshkonong CDP,42.90973,-88.91955
+WI,Madison city,43.07469,-89.38417
+WI,Milwaukee city,43.03865,-87.90908
+WI,Reserve CDP,45.88134,-91.38656
+WI,Suamico village,44.63204,-88.03934
+WY,Bondurant CDP,43.16029,-110.34478
+WY,Slater CDP,41.87303,-104.81997

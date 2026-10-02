@@ -10,10 +10,7 @@ import re
 from dataclasses import dataclass
 from functools import lru_cache
 
-import numpy as np
 from django.conf import settings
-
-from .geometry import haversine_miles
 
 # Legal/statistical suffixes the Gazetteer appends to names ("Tulsa city",
 # "Big Cabin town", "Abanda CDP", "Autaugaville CCD"). Longest first.
@@ -76,8 +73,6 @@ class PlaceIndex:
         for row in rows:
             place = Place(row["name"], row["state"], float(row["lat"]), float(row["lon"]))
             self._by_key[(row["state"], row["key"])] = place
-        self._lat = np.array([p.lat for p in self._by_key.values()])
-        self._lon = np.array([p.lon for p in self._by_key.values()])
 
     def lookup(self, city: str, state: str):
         state = state.strip().upper()
@@ -86,10 +81,6 @@ class PlaceIndex:
             if place is not None:
                 return place
         return None
-
-    def miles_to_nearest_place(self, lat: float, lon: float) -> float:
-        """How far a point is from any US town; large means outside the USA."""
-        return float(haversine_miles(lat, lon, self._lat, self._lon).min())
 
     def __len__(self):
         return len(self._by_key)
