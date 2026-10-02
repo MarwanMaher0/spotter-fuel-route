@@ -32,8 +32,9 @@ python manage.py load_stations        # loads 6,626 US stations, about 2 s
 python manage.py runserver
 ```
 
-Then open http://127.0.0.1:8000/api/route/map/?start=New%20York,%20NY&finish=Los%20Angeles,%20CA
-or import `postman/fuel-route.postman_collection.json` into Postman.
+Then open http://127.0.0.1:8000/api/route/map/?start=New%20York,%20NY&finish=Los%20Angeles,%20CA,
+try the API interactively in Swagger UI at http://127.0.0.1:8000/api/docs/ (OpenAPI schema at
+`/api/schema/`), or import `postman/fuel-route.postman_collection.json` into Postman.
 
 Run the tests with `python manage.py test`. They don't touch the network.
 
@@ -206,7 +207,7 @@ postman/                    Postman collection
 
 ## Tests
 
-`python manage.py test` runs 35 tests:
+`python manage.py test` runs 36 tests:
 
 - The optimizer is checked against two independent brute-force solvers on
   random routes: a Dijkstra over (station, fuel), and an exhaustive search over
@@ -216,7 +217,8 @@ postman/                    Postman collection
 - Geocoding tests cover the city/state/ZIP forms and points on both sides of
   the border.
 - API tests mock OSRM and Nominatim. They check the external-call count,
-  caching, error codes, the default starting fuel and the map page.
+  caching, error codes, the default starting fuel, the map page and the
+  OpenAPI docs.
 
 ## Configuration
 

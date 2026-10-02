@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "drf_spectacular",
     "planner",
 ]
 
@@ -81,6 +82,20 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [],
     "DEFAULT_PERMISSION_CLASSES": [],
     "UNAUTHENTICATED_USER": None,
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+# OpenAPI schema at /api/schema/, interactive Swagger UI at /api/docs/.
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Fuel Route Planner API",
+    "DESCRIPTION": "Cheapest fuel stops for a truck trip between two places in the USA.",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "SWAGGER_UI_SETTINGS": {
+        "displayRequestDuration": True,
+        "defaultModelsExpandDepth": -1,
+        "tryItOutEnabled": True,
+    },
 }
 
 # --- Data files -------------------------------------------------------------

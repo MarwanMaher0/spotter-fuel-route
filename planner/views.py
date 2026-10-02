@@ -3,6 +3,8 @@ from urllib.parse import urlencode
 
 from django.shortcuts import render
 from django.urls import reverse
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -52,9 +54,11 @@ class RoutePlanView(APIView):
     station), stop_cost_usd (default 25), include_geometry (default true).
     """
 
+    @extend_schema(parameters=[RoutePlanRequestSerializer], responses=OpenApiTypes.OBJECT)
     def get(self, request):
         return self._respond(request, request.query_params)
 
+    @extend_schema(request=RoutePlanRequestSerializer, responses=OpenApiTypes.OBJECT)
     def post(self, request):
         return self._respond(request, request.data)
 
@@ -73,6 +77,7 @@ class RoutePlanView(APIView):
 class RouteMapView(APIView):
     """The same plan drawn on an OpenStreetMap map (Leaflet)."""
 
+    @extend_schema(exclude=True)
     def get(self, request):
         trip, _, error = _plan_or_error(request.query_params)
         if error:

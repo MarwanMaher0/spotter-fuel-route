@@ -147,3 +147,12 @@ class RoutePlanApiTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "leaflet")
         self.assertContains(response, "STATION 2")
+
+
+class DocsTests(TestCase):
+    def test_openapi_schema_and_swagger_ui(self):
+        schema = self.client.get("/api/schema/")
+        self.assertEqual(schema.status_code, 200)
+        self.assertIn(b"/api/route/", schema.content)
+        self.assertNotIn(b"/api/route/map/", schema.content)
+        self.assertEqual(self.client.get("/api/docs/").status_code, 200)
